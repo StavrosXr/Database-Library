@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Project</title>
+  <style>
+    body {
+      background: rgb(193, 79, 250);
+      background: linear-gradient(90deg, rgba(193, 79, 250, 1) 30%, rgba(63, 131, 213, 1) 52%, rgba(134, 221, 163, 1) 100%);
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar {
+        position: fixed;
+        left: 3%;
+        top: 3%;
+        bottom: 3%;
+        width: 10%;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 50px;
+        border-radius: 20px 20px 20px 20px;
+        box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
+      }
+      .sidebar h2 {
+        margin-top: 40px;
+      }
+      .sidebar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .sidebar li {
+        margin-bottom: 10px;
+      }
+      .sidebar a {
+        display: block;
+        padding: 18px 20px;
+        border-radius: 12px;
+        background-color: rgba(255, 255, 255, 0.5);
+        color: #333;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+      }
+      .sidebar a:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+    .card-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      text-align: left;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      padding: 5%;
+      box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
+    }
+    .card h2 {
+      text-align: center;
+      margin-bottom: 50px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+    }
+    .card label {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    .card button {
+      display: block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 0.5);
+      color: #333;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    .card button:hover {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+    a {
+      text-decoration: none;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Menu</h2>
+    <ul>
+      <li><a href="/dashboard">Profile</a></li>
+      <li><a href="/school">School Details</a></li>
+      <li><a href="/books">Books</a></li>
+      <li><a href="/users">All Users in School</a></li>
+      <li><a href="/control_panel">Control Panel</a></li>
+      <li><a href="/logout">Logout</a></li>
+  </ul>
+  </div>
+  <div class="card-container">
+    <div class="card">
+      <h2>Library Card</h2>      
+      <button><a href="/users/{{ user[0] }}/card">Print Card</a></button>
+      <p><label>User ID:</label><span>{{ user[0] }}</span></p>
+      <p><label>Username:</label><span>{{ user[1] }}</span></p>
+      <p><label>First Name:</label><span>{{ user[3] }}</span></p>
+      <p><label>Last Name:</label><span>{{ user[4] }}</span></p>
+      <p><label>Email:</label><span>{{ user[6] }}</span></p>
+      <p><label>Role:</label><span>{{ user[7] }}</span></p>
+      <p><label>Date of Birth:</label><span>{{ user[5] }}</span></p>
+      <p><label>School Name:</label><span>{{ user[10] }}</span></p>
+    </div>
+  </div>
+</body>
+</html>

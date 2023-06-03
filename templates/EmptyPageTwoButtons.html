@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>My Project</title>
+    <style>
+      body {
+        background: rgb(193, 79, 250);
+        background: linear-gradient(90deg, rgba(193, 79, 250, 1) 30%, rgba(63, 131, 213, 1) 52%, rgba(134, 221, 163, 1) 100%);
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .sidebar {
+        position: fixed;
+        left: 3%;
+        top: 3%;
+        bottom: 3%;
+        width: 10%;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 50px;
+        border-radius: 20px 20px 20px 20px;
+        box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
+      }
+      .sidebar h2 {
+        margin-top: 40px;
+      }
+      .sidebar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .sidebar li {
+        margin-bottom: 10px;
+      }
+      .sidebar a {
+        display: block;
+        padding: 18px 20px;
+        border-radius: 12px;
+        background-color: rgba(255, 255, 255, 0.5);
+        color: #333;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+      }
+      .sidebar a:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+      
+      .gradient {
+        height: 100vh;
+        background: rgb(193, 79, 250);
+        background: linear-gradient(90deg, rgba(193, 79, 250, 1) 6%, rgba(63, 131, 213, 1) 52%, rgba(134, 221, 163, 1) 100%);
+        padding: 2%;
+      }
+
+      .box {
+        position: fixed;
+        left: 21%;
+        top: 3%;
+        bottom: 3%;
+        width: 66%;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 20px;
+        padding: 5%;
+        box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .box button {
+        display: block;
+        width: 200px;
+        padding: 18px 20px;
+        border-radius: 12px;
+        background-color: rgba(255, 255, 255, 0.5);
+        color: #333;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        margin-bottom: 20px;
+        font-size: 20px;
+      }
+      
+      .box button:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>Menu</h2>
+      <ul>
+        <li>
+          <a href="/profile">Profile</a>
+        </li>
+        <li>
+          <a href="/school">School Details</a>
+        </li>
+        <li>
+          <a href="/books">Books</a>
+        </li>
+        <li>
+          <a href="/queries">Queries</a>
+        </li>
+        <li>
+          <a href="/">Log out</a>
+        </li>
+      </ul>
+    </div>
+    <div class="gradient">
+      <div class="box">
+        <button>Add School</button>
+        <button>See all schools</button>
+      </div>
+    </div>
+  </body>
+</html>

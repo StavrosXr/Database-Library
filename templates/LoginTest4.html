@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Login</title>
+    <style>
+        body {
+            background: rgb(193,79,250);
+            background: linear-gradient(90deg, rgba(193,79,250,1) 6%, rgba(63,131,213,1) 52%, rgba(134,221,163,1) 100%);
+            font-family: sans-serif;
+        }
+        .container {
+            display: flex; /* use flexbox to align the login box to the right */
+            justify-content: flex-end;
+            align-items: center;
+            height: 100vh; /* set the container to be full height */
+            margin: 0 50px; /* add some margin to the container */
+        }
+        .login-box {
+            background-color: #ffffff; /* set the background color of the login box */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* add a shadow effect to the login box */
+            padding: 40px; /* add some padding to the login box */
+            border-radius: 10px; /* round the corners of the login box */
+        }
+        h1 {
+            font-size: 2.5em; /* set the size of the welcome text */
+            color: #333333; /* set the color of the welcome text */
+            margin-bottom: 30px; /* add some margin to the welcome text */
+        }
+        input[type="text"], input[type="password"] {
+            display: block;
+            margin-bottom: 20px;
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            border: 1px solid #dddddd;
+        }
+        input[type="submit"] {
+            background-color: #3f83d5;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        a {
+            color: #3f83d5;
+            text-decoration: none;
+        }
+        .error {
+            display: block;
+            margin-bottom: 20px;
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #ffcccc;
+            color: #ff0000;
+            font-weight: bold;
+            text-align: center;
+        }
+        .about-us {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <h1>Welcome!</h1>
+            {% if error %}
+            <span id="error" class="error">{{ error }}</span>
+            {% endif %}
+            <form action="/login" method="POST">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="submit" value="Login">
+            </form>
+            <p>Don't have an account? <a href="/register">Register here</a></p>
+        </div>
+    </div>
+    <a href="/about" class="about-us">About Us</a>
+    <script>
+        // Get the error message element
+        var errorElem = document.getElementById("error");
+
+        // Remove the error message after 5 seconds
+        setTimeout(function() {
+            if (errorElem) {
+                errorElem.remove();
+            }
+        }, 5000);
+    </script>
+</body>
+</html>

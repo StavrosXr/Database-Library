@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>My Project</title>
+  <style>
+    body {
+      background: rgb(193, 79, 250);
+      background: linear-gradient(90deg, rgba(193, 79, 250, 1) 30%, rgba(63, 131, 213, 1) 52%, rgba(134, 221, 163, 1) 100%);
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .sidebar {
+      position: fixed;
+      left: 3%;
+      top: 3%;
+      bottom: 3%;
+      width: 10%;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 50px;
+      border-radius: 20px 20px 20px 20px;
+      box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .sidebar h2 {
+      margin-top: 40px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar li {
+      margin-bottom: 10px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 18px 20px;
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 0.5);
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .sidebar a:hover {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .gradient {
+      height: 100vh;
+      background: rgb(193, 79, 250);
+      background: linear-gradient(90deg, rgba(193, 79, 250, 1) 6%, rgba(63, 131, 213, 1) 52%, rgba(134, 221, 163, 1) 100%);
+      padding: 2%;
+    }
+
+    .box {
+      position: fixed;
+      left: 21%;
+      top: 3%;
+      bottom: 3%;
+      width: 66%;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      padding: 5%;
+      box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .image-and-info {
+      height: 400px;
+      width: 300px;
+      object-fit: contain;
+      margin-right: 50px;
+      align-self: flex-start;
+    }
+
+    .book-info {
+      position: fixed;
+      left: 800px;
+      top: 15%;
+      height: 1000px;
+      width: 1000px;
+      object-fit: contain;
+      margin-right: 50px;
+      align-self: flex-start;
+      font-size: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .box button {
+      display: block;
+      float: left;
+      margin-top: 0px;
+      margin-right: 10px;
+      padding: 12px 24px;
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 0.5);
+      color: #333;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .box button:hover {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      margin-bottom: 25px;
+    }
+
+    .rating-star {
+      color: rgb(59, 74, 211);
+      margin-right: 3px;
+    }
+
+    .rating-value {
+      margin-left: 5px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="sidebar">
+    <h2>Menu</h2>
+    <ul>
+      <li><a href="/profile">Profile</a></li>
+      <li><a href="/school">School Details</a></li>
+      <li><a href="/books">Books</a></li>
+      <li><a href="/users">All Users in School</a></li>
+      <li><a href="/control_panel">Control Panel</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
+  <div class="gradient">
+    <div class="box">
+      <div class="image-and-info">
+        <img src="{{ book_info[9] }}" alt="{{ book_info[2] }}" style="height:400px;width:200px;object-fit:contain;">
+        <h2>{{ book_info[2] }}</h2>
+        <div class="rating">
+          {% if book_info[13] is not none %}
+            {% for _ in range(5) %}
+              {% if loop.index <= book_info[13] %}
+                <span class="rating-star">&#9733;</span>
+              {% else %}
+                <span class="rating-star">&#9734;</span>
+              {% endif %}
+            {% endfor %}
+            <span class="rating-value">{{ '%.1f' % book_info[13] }}/5</span>
+          {% else %}
+            <span class="rating-star">&#9734;&#9734;&#9734;&#9734;&#9734;</span>
+            <span class="rating-value">0/5</span>
+          {% endif %}
+        </div>        
+        <button><a href="/books/{{ book_info[0] }}/reviews">Reviews</a></button>
+        <button><a href="/books/{{ book_info[0] }}/edit">Edit Data</a></button>
+        
+
+      </div>
+      <div class="book-info">
+        <p>
+          <strong>Author(s):</strong>
+          {% for author in authors %}
+            {{ author[0] }}{% if not loop.last %}, {% endif %}
+          {% endfor %}
+        </p>
+        <p>
+          <strong>ISBN:</strong> {{ book_info[4] }}
+        </p>
+        <p>
+          <strong>Publisher:</strong> {{ book_info[3] }}
+        </p>
+        <p>
+          <strong>Total Page Number:</strong> {{ book_info[5] }}
+        </p>
+        <p>
+          <strong>Summary:</strong> {{ book_info[6] }}
+        </p>
+        <p>
+          <strong>Available Copies:</strong> {{ book_info[8] }}
+        </p>
+        <p>
+          <strong>Total Copies:</strong> {{ book_info[7] }}
+        </p>
+        <p>
+          <strong>Categories:</strong>
+          {% for category in categories %}
+            {{ category[0] }}{% if not loop.last %}, {% endif %}
+          {% endfor %}
+        </p>
+        <p>
+          <strong>Language:</strong> {{ book_info[10] }}
+        </p>
+        <p>
+          <strong>Key Words:</strong>
+          {% for keyword in keywords %}
+            {{ keyword[0] }}{% if not loop.last %}, {% endif %}
+          {% endfor %}
+        </p>
+        <p>
+        <strong>Library:</strong> {{ book_info[12] }} Library
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

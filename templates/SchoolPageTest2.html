@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>My Project</title>
+    <style>
+      body {
+        background: rgb(193, 79, 250);
+        background: linear-gradient(90deg, rgba(193, 79, 250, 1) 30%, rgba(63, 131, 213, 1) 52%, rgba(134, 221, 163, 1) 100%);
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .sidebar {
+        position: fixed;
+        left: 3%;
+        top: 3%;
+        bottom: 3%;
+        width: 10%;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 50px;
+        border-radius: 20px 20px 20px 20px;
+        box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
+      }
+      .sidebar h2 {
+        margin-top: 40px;
+      }
+      .sidebar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .sidebar li {
+        margin-bottom: 10px;
+      }
+      .sidebar a {
+        display: block;
+        padding: 18px 20px;
+        border-radius: 12px;
+        background-color: rgba(255, 255, 255, 0.5);
+        color: #333;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+      }
+      .sidebar a:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+      
+      .gradient {
+        height: 100vh;
+        background: rgb(193, 79, 250);
+        background: linear-gradient(90deg, rgba(193, 79, 250, 1) 6%, rgba(63, 131, 213, 1) 52%, rgba(134, 221, 163, 1) 100%);
+        padding: 2%;
+        }
+
+      .box {
+        position: fixed;
+        left: 21%;
+        top: 3%;
+        bottom: 3%;
+        width: 66%;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 20px;
+        padding: 5%;
+        box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
+        }
+
+      .box h2 {
+        text-align: center;
+        margin-bottom: 50px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 20px;
+      }
+
+      .box ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .box li {
+        margin-bottom: 15px;
+      }
+
+      .box label {
+        display: inline-block;
+        width: 150px;
+        font-weight: bold;
+        margin-right: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>Menu</h2>
+      <ul>
+        <li>
+          <a href="/profile">Profile</a>
+        </li>
+        <li>
+          <a href="/dashboard">School Details</a>
+        </li>
+        <li>
+          <a href="/books">Books</a>
+        </li>
+        <li>
+          <a href="/queries">Queries</a>
+        </li>
+        <li>
+          <a href="/">Log out</a>
+        </li>
+      </ul>
+    </div>
+    <div class="gradient">
+      <div class="box">
+        <h2>School Information</h2>
+        <ul>
+          <li>
+            <label>School Name:</label>
+            <span>{{ school[1] }}</span>
+          </li>
+          <li>
+            <label>Address:</label>
+            <span>{{ school[2] }}</span>
+          </li>
+          <li>
+            <label>City:</label>
+            <span>{{ school[3] }}</span>
+          </li>
+          <li>
+            <label>Phone Number:</label>
+            <span>{{ school[4] }}</span>
+          </li>
+          <li>
+            <label>Email:</label>
+            <span>{{ school[5] }}</span>
+          </li>
+          <li>
+            <label>Principal First Name:</label>
+            <span>{{ school[6] }}</span>
+          </li>
+          <li>
+            <label>Principal Last Name:</label>
+            <span>{{ school[7] }}</span>
+          </li>
+          <li>
+            <label>Operator First Name:</label>
+            <span>{{ school[8] }}</span>
+          </li>
+          <li>
+            <label>Operator Last Name:</label>
+            <span>{{ school[9] }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

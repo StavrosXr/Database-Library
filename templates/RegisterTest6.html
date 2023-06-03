@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Registration</title>
+    <style>
+        body {
+            background: rgb(193,79,250);
+            background: linear-gradient(90deg, rgba(193,79,250,1) 6%, rgba(63,131,213,1) 52%, rgba(134,221,163,1) 100%);
+            font-family: sans-serif;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0 50px;
+        }
+        .register-box {
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            border-radius: 10px;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #333333;
+            margin-bottom: 30px;
+        }
+        input[type="text"], input[type="password"], input[type="email"], input[type="date"], select {
+            display: block;
+            margin-bottom: 20px;
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #dddddd;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #3f83d5;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        a {
+            color: #3f83d5;
+            text-decoration: none;
+        }
+        .error {
+            display: block;
+            margin-bottom: 20px;
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #ffcccc;
+            color: #ff0000;
+            font-weight: bold;
+            text-align: center;
+        }
+        .additional-schools {
+            display: none;
+        }
+    </style>
+    <script>
+        function toggleAdditionalSchools() {
+            var role = document.getElementById("role").value;
+            var additionalSchools = document.getElementById("additional-schools");
+    
+            if (role === "Teacher") {
+                additionalSchools.style.display = "block";
+            } else {
+                additionalSchools.style.display = "none";
+            }
+        }
+    </script>
+    
+</head>
+<body>
+    <div class="container">
+        <div class="register-box">
+            <h1>Register New User</h1>
+            {% if error %}
+            <span id="error" class="error">{{ error }}</span>
+            {% endif %}
+            <form action="/register" method="POST">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="text" name="first_name" placeholder="First Name" required>
+                <input type="text" name="last_name" placeholder="Last Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="date" name="birth_date" placeholder="Birth Date" required>
+                <select name="role" id="role" required onchange="toggleAdditionalSchools()">
+                    <option value="" disabled selected>Select a role</option>
+                    <option value="Student">Student</option>
+                    <option value="Teacher">Teacher</option>
+                    <option value="Operator">Operator</option>
+                </select>
+                <select name="school" required>
+                    <option value="" disabled selected>Select a School</option>
+                    {% for school in schools %}
+                    <option value="{{ school[0] }}">{{ school[0] }}</option>
+                    {% endfor %}
+                </select>
+                <div id="additional-schools" class="additional-schools">
+                    <select name="additional_school">
+                        <option value="" disabled selected>Select Additional School (Optional)</option>
+                        {% for school in schools %}
+                        <option value="{{ school[0] }}">{{ school[0] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <input type="submit" value="Register">
+            </form>
+            <p>Already have an account? <a href="/">Login here</a></p>
+        </div>
+    </div>
+</body>
+</html>

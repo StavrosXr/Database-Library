@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>My Project</title>
+    <style>
+      body {
+        background: linear-gradient(90deg, rgba(193, 79, 250, 1) 30%, rgba(63, 131, 213, 1) 52%, rgba(134, 221, 163, 1) 100%);
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .sidebar {
+        position: fixed;
+        left: 3%;
+        top: 3%;
+        bottom: 3%;
+        width: 10%;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 50px;
+        border-radius: 20px;
+        box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
+      }
+      .sidebar h2 {
+        margin-top: 40px;
+      }
+      .sidebar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .sidebar li {
+        margin-bottom: 10px;
+      }
+      .sidebar a {
+        display: block;
+        padding: 18px 20px;
+        border-radius: 12px;
+        background-color: rgba(255, 255, 255, 0.5);
+        color: #333;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+      }
+
+      .sidebar a:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+
+      .sidebar a:visited,
+      .sidebar a:active,
+      .sidebar a:focus {
+        color: #333;
+      }
+      
+      .gradient {
+        height: 100vh;
+        background: linear-gradient(90deg, rgba(193, 79, 250, 1) 6%, rgba(63, 131, 213, 1) 52%, rgba(134, 221, 163, 1) 100%);
+        padding: 2%;
+      }
+
+      .box {
+        position: fixed;
+        left: 21%;
+        top: 3%;
+        bottom: 3%;
+        width: 66%;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 20px;
+        padding: 5%;
+        box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
+      }
+        
+      .result {
+        position: fixed;
+        left: 25%;
+        top: 8%;
+        height: 80%;
+        width: 68%;
+        object-fit: contain;
+        margin-right: 50px;
+        align-self: flex-start;
+        font-size: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        overflow-y: auto;
+      }
+      .result h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 20px;
+      }
+      
+      .result1 {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+      
+      .result2 {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .row {
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        flex: 1;
+      }
+      
+      .row p {
+        font-size: 12px;
+        margin-right: 20px;
+        margin-bottom: 5px;
+        word-wrap: break-word;
+      }
+
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>Menu</h2>
+      <ul>
+        <li><a href="/profile">Profile</a></li>
+      <li><a href="/school">All Schools</a></li>
+      <li><a href="/books">All Books</a></li>
+      <li><a href="/users">All Users</a></li>
+      <li><a href="/control_panel">Control Panel</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+    </div>
+    <div class="gradient">
+      <div class="box">
+        <div class="result">
+          <h2>All Users In Database</h2>
+          {% for user in users %}
+          <div class="result1">
+            <a href="/users/{{ user[0] }}" style="text-decoration: none;">
+              <div class="row">
+                <p><strong>First Name:</strong> {{ user[3] }}</p>
+                <p><strong>Last Name:</strong> {{ user[4] }}</p>
+                <p><strong>Username:</strong> {{ user[1] }}</p>
+                <p><strong>Password:</strong> {{ user[2] }}</p>
+                <p><strong>Date of Birth:</strong> {{ user[5] }}</p>
+                <p><strong>Email:</strong> {{ user[6] }}</p>
+                <p><strong>Role:</strong> {{ user[7] }}</p>
+                <p><strong>Status:</strong> {{ user[8] }}</p>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

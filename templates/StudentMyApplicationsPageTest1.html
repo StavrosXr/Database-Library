@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>My Project</title>
+  <style>
+    body {
+      background: rgb(193, 79, 250);
+      background: linear-gradient(90deg, rgba(193, 79, 250, 1) 30%, rgba(63, 131, 213, 1) 52%, rgba(134, 221, 163, 1) 100%);
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .sidebar {
+      position: fixed;
+      left: 3%;
+      top: 3%;
+      bottom: 3%;
+      width: 10%;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 50px;
+      border-radius: 20px 20px 20px 20px;
+      box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .sidebar h2 {
+      margin-top: 40px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar li {
+      margin-bottom: 10px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 18px 20px;
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 0.5);
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .sidebar a:hover {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .gradient {
+      height: 100vh;
+      background: rgb(193, 79, 250);
+      background: linear-gradient(90deg, rgba(193, 79, 250, 1) 6%, rgba(63, 131, 213, 1) 52%, rgba(134, 221, 163, 1) 100%);
+      padding: 2%;
+    }
+
+    .box {
+      position: fixed;
+      left: 21%;
+      top: 3%;
+      bottom: 3%;
+      width: 66%;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      padding: 5%;
+      box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .result {
+      position: relative;
+      height: 80%;
+      margin-right: 50px;
+      font-size: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+    }
+
+    .result h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+    }
+
+    .row {
+      background-color: rgba(255, 255, 255, 0.5);
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    .row .book-info {
+      flex-grow: 1;
+    }
+
+    .row .return-btn {
+      margin-left: 10px;
+    }
+
+    .status {
+      font-weight: bold;
+    }
+
+    .return-btn button {
+      background-color: #cfc5b7;
+      border: none;
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .return-btn button:hover {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="sidebar">
+    <h2>Menu</h2>
+    <ul>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/school">School Details</a></li>
+        <li><a href="/books">Books</a></li>
+        <li><a href="/dashboard">My Applications</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
+  <div class="gradient">
+    <div class="box">
+      <div class="result">
+        <h2> My Applications </h2>
+
+        {% if rent_list %}
+        <h3>Ongoing Rental</h3>
+        {% for application in rent_list %}
+        <div class="row">
+          <div class="book-info">
+            <p><strong>Book: </strong>{{ application[2] }}</p>
+            <p><strong>Start Date: </strong>{{ application[6] }}</p>
+            <p><strong>End Date: </strong>{{ application[7] }}</p>
+            <p class="status"><strong>Status: </strong>{{ application[8] }}</p>
+          </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% if late_list %}
+        <h3>Late</h3>
+        {% for application in late_list %}
+        <div class="row">
+          <div class="book-info">
+            <p><strong>Book: </strong>{{ application[2] }}</p>
+            <p><strong>Start Date: </strong>{{ application[6] }}</p>
+            <p><strong>End Date: </strong>{{ application[7] }}</p>
+            <p class="status"><strong>Status: </strong>{{ application[8] }}</p>
+          </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+
+        {% if application_list %}
+        <h3>In Waiting List</h3>
+        {% for application in application_list %}
+        <div class="row">
+          <div class="book-info">
+            <p><strong>Book: </strong>{{ application[2] }}</p>
+            <p><strong>Start Date: </strong>{{ application[6] }}</p>
+            <p><strong>End Date: </strong>{{ application[7] }}</p>
+            <p class="status"><strong>Status: </strong>{{ application[8] }}</p>
+            <div class="return-btn">
+              <form action="/applications" method="POST">
+                <button type="submit">Cancel</button>
+                <input type="hidden" name="status_id" value="{{ application[3] }}">
+              </form>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% if waiting_list %}
+        <h3>In Queue</h3>
+        {% for application in waiting_list %}
+        <div class="row">
+          <div class="book-info">
+            <p><strong>Book: </strong>{{ application[2] }}</p>
+            <p><strong>Start Date: </strong>{{ application[6] }}</p>
+            <p><strong>End Date: </strong>{{ application[7] }}</p>
+            <p class="status"><strong>Status: </strong>{{ application[8] }}</p>
+            <div class="return-btn">
+              <form action="/applications" method="POST">
+                <button type="submit">Cancel</button>
+                <input type="hidden" name="status_id" value="{{ application[3] }}">
+              </form>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% if returned_list %}
+        <h3>Returned</h3>
+        {% for application in returned_list %}
+        <div class="row">
+          <div class="book-info">
+            <p><strong>Book: </strong>{{ application[2] }}</p>
+            <p><strong>Start Date: </strong>{{ application[6] }}</p>
+            <p><strong>End Date: </strong>{{ application[7] }}</p>
+            <p class="status"><strong>Status: </strong>{{ application[8] }}</p>
+          </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% if cancelled_list %}
+        <h3>Cancelled List</h3>
+        {% for application in cancelled_list %}
+        <div class="row">
+          <div class="book-info">
+            <p><strong>Book: </strong>{{ application[2] }}</p>
+            <p><strong>Start Date: </strong>{{ application[6] }}</p>
+            <p><strong>End Date: </strong>{{ application[7] }}</p>
+            <p class="status"><strong>Status: </strong>{{ application[8] }}</p>
+          </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

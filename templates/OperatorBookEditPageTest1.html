@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>My Project</title>
+  <style>
+    body {
+      background: rgb(193, 79, 250);
+      background: linear-gradient(90deg, rgba(193, 79, 250, 1) 30%, rgba(63, 131, 213, 1) 52%, rgba(134, 221, 163, 1) 100%);
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .sidebar {
+      position: fixed;
+      left: 3%;
+      top: 3%;
+      bottom: 3%;
+      width: 10%;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 50px;
+      border-radius: 20px 20px 20px 20px;
+      box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .sidebar h2 {
+      margin-top: 40px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar li {
+      margin-bottom: 10px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 18px 20px;
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 0.5);
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .sidebar a:hover {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .gradient {
+      height: 100vh;
+      background: rgb(193, 79, 250);
+      background: linear-gradient(90deg, rgba(193, 79, 250, 1) 6%, rgba(63, 131, 213, 1) 52%, rgba(134, 221, 163, 1) 100%);
+      padding: 2%;
+    }
+
+    .box {
+      position: fixed;
+      left: 21%;
+      top: 3%;
+      bottom: 3%;
+      width: 66%;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      padding: 5%;
+      box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
+
+    }
+
+    .image-and-info {
+      height: 400px;
+      width: 300px;
+      margin-right: 50px;
+      align-self: flex-start;
+    }
+
+    .image-and-info img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+
+    .book-info {
+      position: fixed;
+      left: 800px;
+      top: 15%;
+      height: 75%;
+      width: 1000px;
+      object-fit: contain;
+      margin-right: 50px;
+      align-self: flex-start;
+      font-size: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      overflow-y: scroll;
+
+    }
+
+    .box button {
+      display: block;
+      float: left;
+      margin-top: 0px;
+      margin-right: 10px;
+      padding: 12px 24px;
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 0.5);
+      color: #333;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .box button:hover {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .box input[type="text"] {
+      width: 300px;
+      padding: 6px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+
+    /* New CSS for Rating */
+    .rating {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      margin-bottom: 25px;
+    }
+
+    .rating-star {
+      color: rgb(59, 74, 211);
+      margin-right: 3px;
+    }
+
+    .rating-value {
+      margin-left: 5px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Menu</h2>
+    <ul>
+      <li><a href="/profile">Profile</a></li>
+      <li><a href="/school">School Details</a></li>
+      <li><a href="/books">Books</a></li>
+      <li><a href="/users">All Users in School</a></li>
+      <li><a href="/control_panel">Control Panel</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
+  <div class="gradient">
+    <div class="box">
+      <div class="image-and-info">
+        <img src="{{ book_info[9] }}" alt="{{ book_info[2] }}">
+        <h2>{{ book_info[2] }}</h2>
+      </div>
+      <div class="book-info">
+        <form action="/books/{{ book_info[0] }}/edit" method="POST">
+          <p>
+            <label for="author">Author(s):</label>
+            {% for author in authors %}
+              <input type="text" name="author[]" value="{{ author[0] }}"><br>
+            {% endfor %}
+          </p>
+          <p>
+            <label for="isbn">ISBN:</label> <input type="text" name="isbn" value="{{ book_info[4] }}"><br>
+          </p>
+          <p>
+            <label for="publisher">Publisher:</label> <input type="text" name="publisher" value="{{ book_info[3] }}"><br>
+          </p>
+          <p>
+            <label for="page_number">Total Page Number:</label> <input type="text" name="page_number" value="{{ book_info[5] }}"><br>
+          </p>
+          <p>
+            <label for="summary">Summary:</label> <input type="text" name="summary" value="{{ book_info[6] }}"><br>
+          </p>
+          <p>
+            <label for="available_copies">Available Copies:</label> <input type="text" name="available_copies" value="{{ book_info[8] }}"><br>
+          </p>
+          <p>
+            <label for="total_copies">Total Copies:</label> <input type="text" name="total_copies" value="{{ book_info[7] }}"><br>
+          </p>
+          <p>
+            <label for="category">Categories:</label>
+            {% for category in categories %}
+              <input type="text" name="category[]" value="{{ category[0] }}"><br>
+            {% endfor %}
+          </p>
+          <p>
+            <label for="language">Language:</label> <input type="text" name="language" value="{{ book_info[10] }}"><br>
+          </p>
+          <p>
+            <label for="keyword">Key Words:</label>
+            {% for keyword in keywords %}
+              <input type="text" name="keyword[]" value="{{ keyword[0] }}"><br>
+            {% endfor %}
+          </p>
+          <p>
+            <strong>Library:</strong> {{ book_info[12] }} Library
+          </p>
+          <button type="submit">Submit Changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

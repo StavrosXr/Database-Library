@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>My Project</title>
+  <style>
+    body {
+      background: rgb(193, 79, 250);
+      background: linear-gradient(90deg, rgba(193, 79, 250, 1) 30%, rgba(63, 131, 213, 1) 52%, rgba(134, 221, 163, 1) 100%);
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .sidebar {
+      position: fixed;
+      left: 3%;
+      top: 3%;
+      bottom: 3%;
+      width: 10%;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 50px;
+      border-radius: 20px 20px 20px 20px;
+      box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .sidebar h2 {
+      margin-top: 40px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar li {
+      margin-bottom: 10px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 18px 20px;
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 0.5);
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .sidebar a:hover {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .gradient {
+      height: 100vh;
+      background: rgb(193, 79, 250);
+      background: linear-gradient(90deg, rgba(193, 79, 250, 1) 6%, rgba(63, 131, 213, 1) 52%, rgba(134, 221, 163, 1) 100%);
+      padding: 2%;
+    }
+
+    .box {
+      position: fixed;
+      left: 21%;
+      top: 3%;
+      bottom: 3%;
+      width: 66%;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      padding: 5%;
+      box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
+      overflow-y: auto;
+    }
+
+    .book-info {
+      position: fixed;
+      left: 30%;
+      top: 8%;
+      height: 80%;
+      width: 90%;
+      object-fit: contain;
+      margin-right: 50px;
+      align-self: flex-start;
+      font-size: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      overflow: auto;
+    }
+    
+    .box h2 {
+      text-align: center;
+      width: 70%;
+      margin-bottom: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+    }
+
+    .box button {
+      display: block;
+      float: left;
+      margin-top: 0px;
+      margin-right: 10px;
+      padding: 12px 24px;
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 0.5);
+      color: #333;
+      font-size: 10px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .box button:hover {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .box input[type="text"] {
+      width: 300px;
+      padding: 6px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+  </style>
+  <script>
+    function addInputField(containerId, inputName) {
+      const container = document.getElementById(containerId);
+      const inputContainer = document.createElement('div');
+      inputContainer.innerHTML = `<input type="text" name="${inputName}[]" required><button onclick="removeInputField(this)">-</button>`;
+      container.appendChild(inputContainer);
+    }
+
+    function removeInputField(button) {
+      const container = button.parentNode.parentNode;
+      const inputContainer = button.parentNode;
+      container.removeChild(inputContainer);
+    }
+  </script>
+</head>
+
+<body>
+  <div class="sidebar">
+    <h2>Menu</h2>
+    <ul>
+      <li><a href="/profile">Profile</a></li>
+      <li><a href="/school">All Schools</a></li>
+      <li><a href="/books">All Books</a></li>
+      <li><a href="/users">All Users</a></li>
+      <li><a href="/control_panel">Control Panel</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
+  <div class="gradient">
+    <div class="box">
+      <div class="book-info">
+        <h2>Add Book To Library</h2>
+        <form action="/books/add_book" method="POST">
+          <p>
+            <label for="title">Title:</label> <input type="text" name="title" required><br>
+          </p>
+          <p>
+            <label for="author">Author(s):</label>
+            <div id="authorContainer">
+              <input type="text" name="author[]" required><button onclick="addInputField('authorContainer', 'author')">+</button><br>
+            </div>
+          </p>
+          <p>
+            <label for="isbn">ISBN:</label> <input type="text" name="isbn" required><br>
+          </p>
+          <p>
+            <label for="publisher">Publisher:</label> <input type="text" name="publisher" required><br>
+          </p>
+          <p>
+            <label for="page_number">Total Page Number:</label> <input type="text" name="page_number" required><br>
+          </p>
+          <p>
+            <label for="summary">Summary:</label> <input type="text" name="summary" required><br>
+          </p>
+          <p>
+            <label for="available_copies">Available Copies:</label> <input type="text" name="available_copies" required><br>
+          </p>
+          <p>
+            <label for="total_copies">Total Copies:</label> <input type="text" name="total_copies" required><br>
+          </p>
+          <p>
+            <label for="category">Categories:</label>
+            <div id="categoryContainer">
+              <input type="text" name="category[]" required><button onclick="addInputField('categoryContainer', 'category')">+</button><br>
+            </div>
+          </p>
+          <p>
+            <label for="language">Language:</label> <input type="text" name="language" required><br>
+          </p>
+          <p>
+            <label for="keyword">Key Words:</label>
+            <div id="keywordContainer">
+              <input type="text" name="keyword[]" required><button onclick="addInputField('keywordContainer', 'keyword')">+</button><br>
+            </div>
+          </p>
+          <p>
+            <label for="cover">Cover Image URL:</label> <input type="text" name="cover" required><br>
+          </p>
+          <p>
+            <strong>Library:</strong>
+            <select name="library" required>
+              <option value="" disabled selected>Select a School</option>
+                {% for school in schools %}
+                <option value="{{ school[0] }}">{{ school[0] }}</option>
+                {% endfor %}
+            </select>
+          </p>
+          <button type="submit">Add Book</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

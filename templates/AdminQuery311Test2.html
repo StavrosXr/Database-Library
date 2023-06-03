@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>My Project</title>
+    <style>
+      body {
+        background: rgb(193, 79, 250);
+        background: linear-gradient(90deg, rgba(193, 79, 250, 1) 30%, rgba(63, 131, 213, 1) 52%, rgba(134, 221, 163, 1) 100%);
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .sidebar {
+        position: fixed;
+        left: 3%;
+        top: 3%;
+        bottom: 3%;
+        width: 10%;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 50px;
+        border-radius: 20px;
+        box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
+      }
+      .sidebar h2 {
+        margin-top: 40px;
+      }
+      .sidebar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .sidebar li {
+        margin-bottom: 10px;
+      }
+      .sidebar a {
+        display: block;
+        padding: 18px 20px;
+        border-radius: 12px;
+        background-color: rgba(255, 255, 255, 0.5);
+        color: #333;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+      }
+      .sidebar a:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+      
+      .gradient {
+        height: 100vh;
+        background: rgb(193, 79, 250);
+        background: linear-gradient(90deg, rgba(193, 79, 250, 1) 6%, rgba(63, 131, 213, 1) 52%, rgba(134, 221, 163, 1) 100%);
+        padding: 2%;
+      }
+
+      .box {
+        position: fixed;
+        left: 21%;
+        top: 3%;
+        bottom: 3%;
+        width: 66%;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 20px;
+        padding: 5%;
+        box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+      }
+        
+      .result {
+        position: fixed;
+        left: 25%;
+        top: 10%;
+        height: 80%;
+        width: 68%;
+        object-fit: contain;
+        margin-right: 50px;
+        align-self: flex-start;
+        font-size: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        overflow-y: auto;
+      }
+    
+      .result h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 20px;
+      }
+
+      .row {
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      
+      .row p {
+        font-size: 12px;
+        margin-right: 20px;
+        margin-bottom: 5px;
+        word-wrap: break-word;
+      }
+
+      .school-select {
+        margin-bottom: 20px;
+        width: 100%;
+        padding: 5px;
+        border-radius: 12px;
+      }
+
+      .school-select option {
+        padding: 5px;
+      }
+
+      .filter-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .filter-select {
+        margin-right: 10px;
+        padding: 5px;
+        border-radius: 12px;
+      }
+
+      .filter-select option {
+        padding: 5px;
+      }
+
+      .filter-submit {
+        padding: 8px 20px;
+        border-radius: 12px;
+        background-color: rgba(255, 255, 255, 0.5);
+        color: #333;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+      }
+
+      .filter-submit:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>Menu</h2>
+      <ul>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/school">All Schools</a></li>
+        <li><a href="/books">All Books</a></li>
+        <li><a href="/users">All Users</a></li>
+        <li><a href="/control_panel">Control Panel</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </div>
+    <div class="gradient">
+      <div class="box">
+        <div class="result">
+          <div class="filter-container">
+            <form method="POST" action="/query311">
+              <select class="school-select" name="selected_school">
+                <option value="">All Schools</option>
+                {% for school in schools %}
+                  <option value="{{ school[0] }}">{{ school[1] }}</option>
+                {% endfor %}
+              </select>
+              <select class="filter-select" name="selected_year">
+                <option value="">All Years</option>
+                {% for year in years %}
+                  <option value="{{ year }}">{{ year }}</option>
+                {% endfor %}
+              </select>
+              <select class="filter-select" name="selected_month">
+                <option value="">All Months</option>
+                {% for month in months %}
+                  <option value="{{ month }}">{{ month }}</option>
+                {% endfor %}
+              </select>
+              <input class="filter-submit" type="submit" value="Filter">
+            </form>
+          </div>
+          {% set schools = result|groupby(1) %}
+          {% for school, rentals in schools %}
+            <h2>Rentals for {{ school }}</h2> <!-- Display school title -->
+            {% for data in rentals %}
+              <div class="row">
+                <p><strong>First Name of the User:</strong> {{ data[2] }}</p>
+                <p><strong>Last Name of the User:</strong> {{ data[3] }}</p>
+                <p><strong>Title of the Book:</strong> {{ data[4] }}</p>
+                <p><strong>Categories of the Book:</strong> {{ data[5] }}</p>
+                <p><strong>Authors of the Book:</strong> {{ data[6] }}</p>
+              </div>
+            {% endfor %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

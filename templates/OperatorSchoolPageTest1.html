@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Project</title>
+  <style>
+    body {
+      background: rgb(193, 79, 250);
+      background: linear-gradient(90deg, rgba(193, 79, 250, 1) 30%, rgba(63, 131, 213, 1) 52%, rgba(134, 221, 163, 1) 100%);
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar {
+      position: fixed;
+      left: 3%;
+      top: 3%;
+      bottom: 3%;
+      width: 10%;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 50px;
+      border-radius: 20px 20px 20px 20px;
+      box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
+    }
+    .sidebar h2 {
+      margin-top: 40px;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .sidebar li {
+      margin-bottom: 10px;
+    }
+    .sidebar a {
+      display: block;
+      padding: 18px 20px;
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 0.5);
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    .sidebar a:hover {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+      
+    .gradient {
+      height: 100vh;
+      background: rgb(193, 79, 250);
+      background: linear-gradient(90deg, rgba(193, 79, 250, 1) 6%, rgba(63, 131, 213, 1) 52%, rgba(134, 221, 163, 1) 100%);
+      padding: 2%;
+    }
+
+    .box {
+      position: fixed;
+      left: 21%;
+      top: 3%;
+      bottom: 3%;
+      width: 66%;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      padding: 5%;
+      box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .box h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      margin-top: 5px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+    }
+
+    .box ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .box li {
+      margin-bottom: 15px;
+    }
+
+    .box label {
+      display: inline-block;
+      width: 200px;
+      font-weight: bold;
+      margin-right: 30px;
+    }
+
+    .school-box {
+      overflow-y: scroll;
+      max-height: 85%;
+      margin-bottom: 20px;
+    }
+
+    .school-box:first-child h3 {
+      display: none;
+    }
+    .school-box h3{
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 25px;
+      text-decoration: underline;
+    }
+    
+    .box button {
+      display: block;
+      float: right;
+      margin-top: 0px;
+      margin-right: 10px;
+      padding: 12px 24px;
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 0.5);
+      color: #333;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .box button:hover {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+    a {
+      text-decoration: none;
+      color: black;
+    }
+    .scroll {
+  display: flex;
+  justify-content: center;
+}
+    
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Menu</h2>
+    <ul>
+      <li><a href="/profile">Profile</a></li>
+      <li><a href="/dashboard">School Details</a></li>
+      <li><a href="/books">Books</a></li>
+      <li><a href="/users">All Users in School</a></li>
+      <li><a href="/control_panel">Control Panel</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
+  <div class="gradient">
+    <div class="box">
+      <h2>School Information</h2>
+      <div class="school-box">
+      {% for school_data in school %}
+        <h3>School {{ loop.index }}</h3>
+        <div class= "scroll">
+        <button><a href="/update_school">Edit School</a></button>
+        </div>
+        <ul>
+          <li>
+            <label>School Name:</label>
+            <span>{{ school_data[1] }}</span>
+          </li>
+          <li>
+            <label>Address:</label>
+            <span>{{ school_data[2] }}</span>
+          </li>
+          <li>
+            <label>City:</label>
+            <span>{{ school_data[3] }}</span>
+          </li>
+          <li>
+            <label>Phone Number:</label>
+            <span>{{ school_data[4] }}</span>
+          </li>
+          <li>
+            <label>Email:</label>
+            <span>{{ school_data[5] }}</span>
+          </li>
+          <li>
+            <label>Principal:</label>
+            <span>{{ school_data[6] }} {{ school_data[7] }}</span>
+          </li>
+          <li>
+            <label>Operator:</label>
+            <span>{{ school_data[8] }} {{ school_data[9] }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
