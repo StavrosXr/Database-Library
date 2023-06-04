@@ -36,10 +36,10 @@ Before we begin make sure you have installed the latest version of Python, you h
 	```
 	mysql -u root -p -h localhost MyLibrary < {backup_file_path}
 	```
-	where {backup_file_path} is the path to the library.sql file. 
-	For example "..\Database-Library\library.sql
+	where {backup_file_path} is the path to the library.sql file.  
+	For example "..\Database-Library\library.sql. 
 	If you get an error when running this try saving the library.sql file in an all english path
-9.  Go back to the directory of the project ( "..\Database-Library\ ) 
+9.  Go back to the directory of the project ( "..\Database-Library\ ) with the cd command. 
 10. Depending on your python version use the command ***python3 app.py*** or ***python app.py*** or ***py app.py*** and visit http://localhost:5000/ from a browser to run the web app or click the link that appears when you run the app.
 	
 ## ER DIAGRAM
