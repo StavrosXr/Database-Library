@@ -1690,7 +1690,7 @@ def create_backup():
     host = 'localhost'
     user = 'root'
     password = ''
-    database = 'library'
+    database = 'MyLibrary'
 
     backup_dir = r'C:\Users\voudo\Documents\codes\DatabaseLibrary\DatabaseBackups'
 
@@ -1726,7 +1726,7 @@ def restore_backup_post():
     host = 'localhost'
     user = 'root'
     password = ''
-    database = 'library'
+    database = 'MyLibrary'
 
     backup_dir = r'C:\Users\voudo\Documents\codes\DatabaseLibrary\DatabaseBackups'
 
