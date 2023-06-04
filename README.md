@@ -2,8 +2,7 @@
 
 ## Installation Guide
 
-Before we begin make sure you have installed the latest version of Python
-and you have [GIT](https://git-scm.com/download/win) you have a program like [XAMPP](https://www.apachefriends.org/download.html) installed to test the code in a local server.
+Before we begin make sure you have installed the latest version of Python, you have [GIT](https://git-scm.com/download/win) and you have a program like [XAMPP](https://www.apachefriends.org/download.html) installed to test the code in a local server.
 
 ### Step-by-Step instructions
 
