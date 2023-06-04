@@ -10,7 +10,11 @@ and you have a program like [XAMPP](https://www.apachefriends.org/download.html)
 1. Open the terminal and go to the directory you would like to store the app files.
 2. Make sure you are running the local host server.
 3. In the terminal clone the GitHub repository with this command: 
-	***git clone https://github.com/StavrosXr/Database-Library***
+```
+function test() {
+  console.log("git clone https://github.com/StavrosXr/Database-Library");
+}
+```
 4. In the terminal do this command to change the directory to the one we just made:
 	***cd Database-Library***
 5. In the terminal run the following script to download all required libraries:
