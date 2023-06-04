@@ -912,7 +912,7 @@ def query311():
         JOIN user_book_status ubs ON u.User_ID = ubs.User_ID
         JOIN book b ON ubs.Book_ID = b.Book_ID
         JOIN school c ON c.School_ID = b.School_ID
-        WHERE (ubs.Type = 'Rent' OR ubs.Type = 'Returned')
+        WHERE (ubs.Type = 'Rent' OR ubs.Type = 'Returned' OR ubs.Type = 'Late')
         '''
 
         conditions = []
