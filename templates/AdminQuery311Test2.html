@@ -188,14 +188,10 @@
           </div>
           {% set schools = result|groupby(1) %}
           {% for school, rentals in schools %}
-            <h2>Rentals for {{ school }}</h2>
             {% for data in rentals %}
               <div class="row">
-                <p><strong>First Name of the User:</strong> {{ data[2] }}</p>
-                <p><strong>Last Name of the User:</strong> {{ data[3] }}</p>
-                <p><strong>Title of the Book:</strong> {{ data[4] }}</p>
-                <p><strong>Categories of the Book:</strong> {{ data[5] }}</p>
-                <p><strong>Authors of the Book:</strong> {{ data[6] }}</p>
+                <p><strong>School Name:</strong> {{ data[1] }}</p>
+                <p><strong>Number of Rentals:</strong> {{ data[2] }}</p>
               </div>
             {% endfor %}
           {% endfor %}

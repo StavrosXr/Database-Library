@@ -907,17 +907,7 @@ def query311():
         selected_month = request.form.get('selected_month')
 
         base_query = '''
-        SELECT b.School_ID, c.Name AS School_Name, u.U_First_Name, u.U_Last_Name, b.Title,
-        (
-        SELECT GROUP_CONCAT(DISTINCT Category SEPARATOR ', ')
-        FROM book_category
-        WHERE Book_ID = b.Book_ID
-        ) AS Categories,
-        (
-        SELECT GROUP_CONCAT(DISTINCT Author SEPARATOR ', ')
-        FROM book_author
-        WHERE Book_ID = b.Book_ID
-        ) AS Authors
+        SELECT c.School_ID, c.Name AS School_Name, COUNT(*) AS Rental_Count
         FROM user u
         JOIN user_book_status ubs ON u.User_ID = ubs.User_ID
         JOIN book b ON ubs.Book_ID = b.Book_ID
@@ -929,7 +919,7 @@ def query311():
         values = []
 
         if selected_school:
-            conditions.append("b.School_ID = %s")
+            conditions.append("c.School_ID = %s")
             values.append(selected_school)
 
         if selected_year:
@@ -945,27 +935,20 @@ def query311():
         else:
             query = base_query
 
+        query += " GROUP BY c.School_ID, c.Name"  # Grouping by School_ID and School_Name
+
         mycursor.execute(query, tuple(values))
         result = mycursor.fetchall()
         print(query)
     else:
         query = '''
-        SELECT b.School_ID, c.Name AS School_Name, u.U_First_Name, u.U_Last_Name, b.Title,
-        (
-        SELECT GROUP_CONCAT(DISTINCT Category SEPARATOR ', ')
-        FROM book_category
-        WHERE Book_ID = b.Book_ID
-        ) AS Categories,
-        (
-        SELECT GROUP_CONCAT(DISTINCT Author SEPARATOR ', ')
-        FROM book_author
-        WHERE Book_ID = b.Book_ID
-        ) AS Authors
+        SELECT c.School_ID, c.Name AS School_Name, COUNT(*) AS Rental_Count
         FROM user u
         JOIN user_book_status ubs ON u.User_ID = ubs.User_ID
         JOIN book b ON ubs.Book_ID = b.Book_ID
         JOIN school c ON c.School_ID = b.School_ID
         WHERE (ubs.Type = 'Rent' OR ubs.Type = 'Returned')
+        GROUP BY c.School_ID, c.Name
         '''
         mycursor.execute(query)
         result = mycursor.fetchall()
@@ -983,7 +966,6 @@ def query311():
     months = [str(row[0]) for row in mycursor.fetchall()]
 
     return render_template('AdminQuery311Test2.html', result=result, schools=schools, years=years, months=months)
-
 
 
 
@@ -1143,6 +1125,95 @@ def query317():
     result = mycursor.fetchall()
     return render_template('AdminQuery317.html', result=result)
 
+@app.route('/query321', methods=['GET', 'POST'])
+def query321():
+    user_id = session['user_id']
+    
+    query = '''
+        SELECT DISTINCT bc.Category 
+        FROM book AS b 
+        INNER JOIN book_category AS bc ON b.Book_ID = bc.Book_ID 
+        WHERE b.School_ID IN (SELECT School_ID FROM school_user WHERE User_ID = %s)
+    '''
+    mycursor.execute(query, (user_id,))
+    categories = mycursor.fetchall()
+
+    query = """SELECT DISTINCT ba.Author
+        FROM book AS b
+        INNER JOIN book_author AS ba
+        ON b.Book_ID = ba.Book_ID
+        WHERE b.School_ID IN (
+            SELECT School_ID
+            FROM school_user
+            WHERE User_ID = %s
+        )"""
+    mycursor.execute(query, (user_id,))
+    authors = mycursor.fetchall()
+
+    values = []  # Define an empty list for values
+
+    if request.method == 'POST':
+        search_title = request.form.get('search_title')
+        selected_category = request.form.get('selected_category')
+        selected_author = request.form.get('selected_author')  
+        selected_language = request.form.get('selected_language')
+        copies = request.form.get('copies')
+
+        base_query = '''
+        SELECT DISTINCT b.Title, GROUP_CONCAT(DISTINCT ba.Author) AS Authors, GROUP_CONCAT(DISTINCT bc.Category) AS Categories, b.Copies
+        FROM book b
+        LEFT JOIN book_author ba ON b.Book_ID = ba.Book_ID
+        LEFT JOIN book_category bc ON b.Book_ID = bc.Book_ID
+        WHERE b.School_ID IN (SELECT School_ID FROM school_user WHERE User_ID = %s)
+        '''
+
+        conditions = []
+        values = []
+
+        if search_title:
+            conditions.append("b.Title LIKE %s")
+            values.append(f"%{search_title}%")
+
+        if selected_category:
+            selected_category = selected_category.strip("(',)")
+            conditions.append("bc.Category = %s")
+            values.append(selected_category)
+
+        if selected_author:
+            selected_author = selected_author.strip("(',)")
+            conditions.append("ba.Author = %s")
+            values.append(selected_author)
+
+        if selected_language:
+            conditions.append("b.Language = %s")
+            values.append(selected_language)
+
+        if copies:
+            conditions.append("b.Copies = %s")
+            values.append(copies)
+
+        if conditions:
+            query = base_query + " AND " + " AND ".join(conditions) + " GROUP BY b.Book_ID, b.Copies"
+        else:
+            query = base_query + " GROUP BY b.Book_ID, b.Copies"
+
+        mycursor.execute(query, tuple([user_id] + values))
+        result = mycursor.fetchall()
+    else:
+        query = '''
+        SELECT DISTINCT b.Title, GROUP_CONCAT(DISTINCT ba.Author) AS Authors, GROUP_CONCAT(DISTINCT bc.Category) AS Categories, b.Copies
+        FROM book b
+        LEFT JOIN book_author ba ON b.Book_ID = ba.Book_ID
+        LEFT JOIN book_category bc ON b.Book_ID = bc.Book_ID
+        WHERE b.School_ID IN (SELECT School_ID FROM school_user WHERE User_ID = %s)
+        GROUP BY b.Book_ID, b.Copies
+        '''
+        mycursor.execute(query, (user_id,))
+        result = mycursor.fetchall()
+
+    return render_template('OperatorQuery321.html', result=result, categories=categories, authors=authors)
+
+
 @app.route('/query322', methods=['GET', 'POST'])
 def query322():
     user_id = session['user_id']
@@ -1183,19 +1254,49 @@ def query322():
     result = mycursor.fetchall()
     return render_template('OperatorQuery322.html', result=result)
 
+@app.route('/query323select', methods=['GET'])
+def query312select():
+    query = "SELECT DISTINCT Category FROM book_category"
+    mycursor.execute(query)
+    categories = mycursor.fetchall()
+    return render_template('OperatorQuery323select.html', categories=categories) 
+
 @app.route('/query323')
 def query323():
     user_id = session['user_id']
+    first_name = request.args.get('first_name')
+    last_name = request.args.get('last_name')
+    category = request.args.get('category')
+    category = category.strip("(',)")
+    print(category)
+
     query1 = '''
     SELECT u.User_ID, u.U_First_Name, u.U_Last_Name, AVG(ubr.Stars) AS AvgUserRating
     FROM user u
     INNER JOIN user_book_status ubs ON u.User_ID = ubs.User_ID
     INNER JOIN user_book_review ubr ON ubs.User_ID = ubr.User_ID AND ubs.Book_ID = ubr.Book_ID
     INNER JOIN school_user su ON u.User_ID = su.User_ID
+    INNER JOIN book b ON ubs.Book_ID = b.Book_ID
+    INNER JOIN book_category bc ON b.Book_ID = bc.Book_ID
     WHERE su.school_id = (SELECT school_id FROM school_user WHERE User_ID = %s)
-    GROUP BY u.User_ID, u.U_First_Name;
     '''
-    mycursor.execute(query1, (user_id,))
+
+    query1_params = [user_id]
+
+    if first_name and last_name:
+        query1 += ' AND u.U_First_Name = %s AND u.U_Last_Name = %s'
+        query1_params.extend([first_name, last_name])
+
+    if category:
+        query1 += ' AND bc.Category = %s'
+        query1_params.append(category)
+
+    query1 += '''
+        AND ubs.Type IN ('Rent', 'Returned', 'Late')
+    GROUP BY u.User_ID, u.U_First_Name, u.U_Last_Name;
+    '''
+
+    mycursor.execute(query1, query1_params)
     result1 = mycursor.fetchall()
 
     query2 = '''
@@ -1206,9 +1307,17 @@ def query323():
     INNER JOIN user u ON u.User_ID = ubr.User_ID
     INNER JOIN school_user su ON u.User_ID = su.User_ID
     WHERE su.school_id = (SELECT school_id FROM school_user WHERE User_ID = %s)
-    GROUP BY bc.Category
     '''
-    mycursor.execute(query2, (user_id,))
+
+    query2_params = [user_id]
+
+    if category:
+        query2 += ' AND bc.Category = %s'
+        query2_params.append(category)
+
+    query2 += ' GROUP BY bc.Category'
+
+    mycursor.execute(query2, query2_params)
     result2 = mycursor.fetchall()
 
     return render_template('OperatorQuery323.html', result1=result1, result2=result2)
@@ -1272,11 +1381,43 @@ def applications():
     role = session['role']
     if request.method == 'POST':
         status_id = request.form['status_id']
+        book_id = request.form['book_id']
         end_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        update_query = "UPDATE user_book_status SET Type = 'Cancelled', End_Date = %s WHERE Status_ID = %s "
-        mycursor.execute(update_query, (end_date, status_id,))
-        mydb.commit()
         
+        # Check the status of the pressed cancel application
+        query_status = "SELECT Type FROM user_book_status WHERE Status_ID = %s"
+        mycursor.execute(query_status, (status_id,))
+        status = mycursor.fetchone()[0]
+        
+        if status == 'Application':
+            # If the status is 'Application', check for waiting applications
+            query_waiting = """SELECT Status_ID
+                            FROM user_book_status
+                            WHERE Book_ID = %s
+                            AND Type = 'Waiting'
+                            ORDER BY Start_Date ASC
+                            LIMIT 1"""
+            mycursor.execute(query_waiting, (book_id,))
+            waiting = mycursor.fetchone()
+            
+            if waiting:
+                wait_status_id = waiting[0]
+                query_update_waiting = "UPDATE user_book_status SET Type = 'Application' WHERE Status_ID = %s"
+                mycursor.execute(query_update_waiting, (wait_status_id,))
+                mydb.commit()
+            else:
+                query_update_cancel = "UPDATE user_book_status SET Type = 'Cancelled', End_Date = %s WHERE Status_ID = %s "
+                mycursor.execute(query_update_cancel, (end_date, status_id,))
+                mydb.commit()
+                query_update_book = "UPDATE book SET Available_Copies = Available_Copies + 1 WHERE Book_ID = %s"
+                mycursor.execute(query_update_book, (book_id,))
+                mydb.commit()
+        else:
+            # If the status is not 'Application', update it to 'Cancelled'
+            query_update_cancel = "UPDATE user_book_status SET Type = 'Cancelled', End_Date = %s WHERE Status_ID = %s "
+            mycursor.execute(query_update_cancel, (end_date, status_id,))
+            mydb.commit()
+
         return redirect("/applications")
     else:       
         query = """SELECT u.U_First_Name, u.U_Last_Name, b.Title AS Book_Title, ubs.*
