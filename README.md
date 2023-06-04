@@ -41,7 +41,7 @@ and you have [GIT](https://git-scm.com/download/win) you have a program like [XA
 	for example "..\Database-Library\library.sql
 	if you get an error when running this try saving the library.sql file in an all english path
 9.  Go back to the directory of the project ( "..\Database-Library\ ) 
-10. Depending on your python version use the command ***python3 app.py*** or ***python app.py*** or ***py app.py*** and visit http://localhost:5000/ from a browser to run the web app.
+10. Depending on your python version use the command ***python3 app.py*** or ***python app.py*** or ***py app.py*** and visit http://localhost:5000/ from a browser to run the web app or click the link that appears when you run the app.
 	
 ## ER DIAGRAM
 ![Alt text](Diagrams/ER-DIAGRAM.png "ER-DIAGRAM")
