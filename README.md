@@ -44,3 +44,8 @@ and you have a program like [XAMPP](https://www.apachefriends.org/download.html)
 
 ## RELATIONAL DIAGRAM
 ![Alt text](Diagrams/RELATIONAL-DIAGRAM.png "ER-DIAGRAM")
+
+## SCREENSHOTS
+![Alt text](Diagrams/Screenshot1.png "SCREENSHOT1")
+![Alt text](Diagrams/Screenshot2.png "SCREENSHOT1")
+![Alt text](Diagrams/Screenshot3.png "SCREENSHOT1")
