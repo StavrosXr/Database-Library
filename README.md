@@ -42,6 +42,8 @@ Before we begin make sure you have installed the latest version of Python, you h
 9.  Go back to the directory of the project ( "..\Database-Library\ ) with the cd command. 
 10. Depending on your python version use the command ***python3 app.py*** or ***python app.py*** or ***py app.py*** and visit http://localhost:5000/ from a browser to run the web app or click the link that appears when you run the app.
 	
+Comment: for the option to make a backup of the database from the app and to restore it to an older version, you will need to modify the routes.py code and in the routes /backup, /restore to set the variable 'backup_dir' to the desired path to store the backups (like the one we have in this repository)	
+
 ## ER DIAGRAM
 ![Alt text](Diagrams/ER-DIAGRAM.png "ER-DIAGRAM")
 
