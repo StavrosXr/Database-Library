@@ -10,22 +10,22 @@
             font-family: sans-serif;
         }
         .container {
-            display: flex; /* use flexbox to align the login box to the right */
+            display: flex; 
             justify-content: flex-end;
             align-items: center;
-            height: 100vh; /* set the container to be full height */
-            margin: 0 50px; /* add some margin to the container */
+            height: 100vh; 
+            margin: 0 50px; 
         }
         .login-box {
-            background-color: #ffffff; /* set the background color of the login box */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* add a shadow effect to the login box */
-            padding: 40px; /* add some padding to the login box */
-            border-radius: 10px; /* round the corners of the login box */
+            background-color: #ffffff; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+            padding: 40px; 
+            border-radius: 10px; 
         }
         h1 {
-            font-size: 2.5em; /* set the size of the welcome text */
-            color: #333333; /* set the color of the welcome text */
-            margin-bottom: 30px; /* add some margin to the welcome text */
+            font-size: 2.5em;
+            color: #333333; 
+            margin-bottom: 30px; 
         }
         input[type="text"], input[type="password"] {
             display: block;
@@ -88,10 +88,8 @@
     </div>
     <a href="/about" class="about-us">About Us</a>
     <script>
-        // Get the error message element
         var errorElem = document.getElementById("error");
 
-        // Remove the error message after 5 seconds
         setTimeout(function() {
             if (errorElem) {
                 errorElem.remove();

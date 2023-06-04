@@ -129,20 +129,20 @@
 
   <div class="gradient">
     <div class="box">
-      <h2>Teachers and the Categories of the Books they have Rented this Year</h2>
+      <h2>Authors whose books have not been rented yet</h2>
       <div class="query-result-table">
         <table>
           <thead>
             <tr>
               <th>Name of the Author</th>
-              <th>Title of the Book</th>
+              
             </tr>
           </thead>
           <tbody>
             {% for data in result %}
             <tr>
               <td>{{ data[0] }}</td>
-              <td>{{ data[1] }}</td>
+              
             </tr>
             {% endfor %}
           </tbody>

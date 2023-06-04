@@ -132,44 +132,17 @@
           <button><a href="/deactivate_profile">Deactivate Profile</a></button>
           <button><a href="/delete_profile">Delete Profile</a></button>
           <ul>
-            <li>
-                <label>Username:</label>
-                <span>{{ user[1] }}</span>
-              </li>
-              <li>
-                <label>Password:</label>
-                <span>{{ user[2] }}</span>
-              </li>
-              <li>
-                <label>First Name:</label>
-                <span>{{ user[3] }}</span>
-              </li>
-              <li>
-                <label>Last Name:</label>
-                <span>{{ user[4] }}</span>
-              </li>
-              <li>
-                <label>Email:</label>
-                <span>{{ user[6] }}</span>
-              </li>
-              <li>
-                <label>Role:</label>
-                <span>{{ user[7] }}</span>
-              </li>
-              <li>
-                <label>Date of Birth:</label>
-                <span>{{ user[5] }}</span>
-              </li>
-              <li>
-                <label>School Name:</label>
-                <span>{{ user[10] }}</span>
-            </li>
-              {% if user[11] %}
-              <li>
-                  <label>Additional School Name:</label>
-                  <span>{{ user[11] }}</span>
-              </li>
-              {% endif %}
+            <li><label>Username:</label><span>{{ user[1] }}</span></li>
+            <li><label>Password:</label><span>{{ user[2] }}</span></li>
+            <li><label>First Name:</label><span>{{ user[3] }}</span></li>
+            <li><label>Last Name:</label><span>{{ user[4] }}</span></li>
+            <li><label>Email:</label><span>{{ user[6] }}</span></li>
+            <li> <label>Role:</label><span>{{ user[7] }}</span></li>
+            <li><label>Date of Birth:</label><span>{{ user[5] }}</span></li>
+            <li><label>School Name:</label><span>{{ user[10] }}</span></li>
+            {% if user[11] %}
+            <li><label>Additional School Name:</label><span>{{ user[11] }}</span></li>
+            {% endif %}
           </ul>
         </div>
       </div>

@@ -144,7 +144,7 @@
           </form>
           {% set schools = result|groupby(1) %}
           {% for school, rentals in schools %}
-            <h2>Rentals for {{ school }}</h2> <!-- Display school title -->
+            <h2>Rentals for {{ school }}</h2>
             {% for data in rentals %}
               <div class="row">
                 <p><strong>First Name of the User:</strong> {{ data[2] }}</p>
