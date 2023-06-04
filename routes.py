@@ -1692,7 +1692,7 @@ def create_backup():
     password = ''
     database = 'MyLibrary'
 
-    backup_dir = r'C:\Users\voudo\Documents\codes\DatabaseLibrary\DatabaseBackups'
+    backup_dir = r'PATH TO SAVE BACKUP GOES HERE'
 
     timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
 
@@ -1712,7 +1712,7 @@ def create_backup():
 
 @app.route('/restore', methods=['GET'])
 def restore_backup():
-    backup_dir = r'C:\Users\voudo\Documents\codes\DatabaseLibrary\DatabaseBackups'
+    backup_dir = r'PATH TO LOAD BACKUP GOES HERE'
 
     backup_files = glob.glob(os.path.join(backup_dir, 'backup_*.sql'))
 
@@ -1728,7 +1728,7 @@ def restore_backup_post():
     password = ''
     database = 'MyLibrary'
 
-    backup_dir = r'C:\Users\voudo\Documents\codes\DatabaseLibrary\DatabaseBackups'
+    backup_dir = r'PATH TO LOAD BACKUP GOES HERE'
 
     backup_file_path = os.path.join(backup_dir, selected_file)
 
