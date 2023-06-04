@@ -26,5 +26,8 @@ and you have a program like [XAMPP](https://www.apachefriends.org/download.html)
 9. Type "exit" to exit MariaDB. Go back to the directory of the project ( "..\Database-Library\ ) 
 10. Depending on your python version use the command python3 app.py or python app.py or py app.py and visit http://localhost:5000/ from a browser to run the web app.
 	
-
+## ER DIAGRAM
 ![Alt text](Diagrams/ER-DIAGRAM.png "ER-DIAGRAM")
+
+## RELATIONAL DIAGRAM
+![Alt text](Diagrams/RELATIONAL-DIAGRAM.png "ER-DIAGRAM")
