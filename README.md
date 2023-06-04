@@ -11,9 +11,7 @@ and you have a program like [XAMPP](https://www.apachefriends.org/download.html)
 2. Make sure you are running the local host server.
 3. In the terminal clone the GitHub repository with this command: 
 ```
-function test() {
-  console.log("git clone https://github.com/StavrosXr/Database-Library");
-}
+git clone https://github.com/StavrosXr/Database-Library
 ```
 4. In the terminal do this command to change the directory to the one we just made:
 	***cd Database-Library***
