@@ -3,7 +3,7 @@
 ## Installation Guide
 
 Before we begin make sure you have installed the latest version of Python
-and you have a program like [XAMPP](https://www.apachefriends.org/download.html) installed to test the code in a local server.
+and you have [GIT](https://git-scm.com/download/win) you have a program like [XAMPP](https://www.apachefriends.org/download.html) installed to test the code in a local server.
 
 ### Step-by-Step instructions
 
@@ -21,6 +21,9 @@ and you have a program like [XAMPP](https://www.apachefriends.org/download.html)
 	```
 	pip install -r requirements.txt
 	```
+	if you get an error when running this try running this instead: 
+	
+	***python -m pip install -r requirements.txt***
 6. To download the database, we first need to go to the directory that you have the bin of the installed XAMPP (for example: C:\xampp\mysql\bin)
 	```
 	cd C:\xampp\mysql\bin
@@ -36,7 +39,8 @@ and you have a program like [XAMPP](https://www.apachefriends.org/download.html)
 	```
 	where {backup_file_path} is the path to the library.sql file. 
 	for example "..\Database-Library\library.sql
-9. Type ***exit*** to exit MariaDB. Go back to the directory of the project ( "..\Database-Library\ ) 
+	if you get an error when running this try saving the library.sql file in an all english path
+9.  Go back to the directory of the project ( "..\Database-Library\ ) 
 10. Depending on your python version use the command ***python3 app.py*** or ***python app.py*** or ***py app.py*** and visit http://localhost:5000/ from a browser to run the web app.
 	
 ## ER DIAGRAM
