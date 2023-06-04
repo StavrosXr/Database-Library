@@ -1,5 +1,10 @@
+##This project is part of our Semester Project for the class "Databases" in the 6th semester of the School of Electrical and Computer Engineering of the National Technical University of Athens
+
+##Installation Guide
+
 Before we begin make sure you have installed the latest version of Python
 and you have a program like [XAMPP](https://www.apachefriends.org/download.html) installed to test the code in a local server.
+###Step-by-Step instructions
 
 1. Open the terminal and go to the directory you would like to store the app files.
 2. Make sure you are running the local host server.
@@ -20,3 +25,5 @@ and you have a program like [XAMPP](https://www.apachefriends.org/download.html)
 9. Type "exit" to exit MariaDB. Go back to the directory of the project ( "..\Database-Library\ ) 
 10. Depending on your python version use the command python3 app.py or python app.py or py app.py and visit http://localhost:5000/ from a browser to run the web app.
 	
+
+![Alt text](Diagrams/ER-DIAGRAM.png "ER-DIAGRAM")
