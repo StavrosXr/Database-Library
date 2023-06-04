@@ -7,16 +7,16 @@ Before we begin make sure you have installed the latest version of Python, you h
 ### Step-by-Step instructions
 
 1. Open the terminal and go to the directory you would like to store the app files.
-2. Make sure you are running the local host server(XAMPP is running with Apache and MySQL active).
-3. In the terminal clone the GitHub repository with this command: 
+2. Make sure you are running the local host server (XAMPP is running with Apache and MySQL active).
+3. In the terminal, clone the GitHub repository with this command: 
 	```
 	git clone https://github.com/StavrosXr/Database-Library
 	```
-4. In the terminal do this command to change the directory to the one we just made:
+4. In the terminal, execute this command to change the directory to the one we just made:
 	```
 	cd Database-Library
 	```
-5. In the terminal run the following script to download all required libraries:
+5. In the terminal, run the following script to download all required libraries:
 	```
 	pip install -r requirements.txt
 	```
