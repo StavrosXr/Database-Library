@@ -25,7 +25,7 @@ and you have a program like [XAMPP](https://www.apachefriends.org/download.html)
 	```
 	cd C:\xampp\mysql\bin
 	```
-7. Execute this command to make the library:
+7. Execute this command to make the empty library:
 	```
 	mysql -u root -p -e "CREATE DATABASE MyLibrary
 	```
