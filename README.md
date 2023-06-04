@@ -1,5 +1,5 @@
 Before we begin make sure you have installed the latest version of Python
-and you have a program like XAMPP installed to test the code in a local server.
+and you have a program like [XAMPP](https://www.apachefriends.org/download.html) installed to test the code in a local server.
 
 1. Open the terminal and go to the directory you would like to store the app files.
 2. Make sure you are running the local host server.
